@@ -48,6 +48,7 @@ The RemoteDataSource will perform HTTP GET requests on the API. LocalDataSource 
 
 # Getting Started
 
+    - Proyect in Flutter 2.10.3
 
 ## Run command
 
