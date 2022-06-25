@@ -26,7 +26,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     on<GetCharacterEvent>((event, emit) async {
       emit(state.copyWith(status: Status.loading));
       final result =
-          await getCharacterUseCase(GetCharacterParams(page: state.page));
+          await getCharacterUseCase(const GetCharacterParams(page: '1'));
       emit(result.fold(
         (failure) => state.copyWith(
           status: Status.error,
