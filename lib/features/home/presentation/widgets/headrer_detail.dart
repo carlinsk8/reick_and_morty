@@ -95,12 +95,12 @@ class HeaderDetail extends StatelessWidget {
             ),
           ),
         ),
-        const Positioned.fill(
+        Positioned.fill(
           top: 210,
           child: Align(
             alignment: Alignment.topCenter,
             child: ButtonFavorite(
-              status: false,
+              status: args.person.favorite,
             ),
           ),
         ),

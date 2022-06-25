@@ -11,6 +11,7 @@ part 'character_state.dart';
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   final GetCharacterUseCase getCharacterUseCase;
   final SetFavoriteCharacterUseCase setFavoriteCharacterUseCase;
+
   CharacterBloc({
     required this.getCharacterUseCase,
     required this.setFavoriteCharacterUseCase,

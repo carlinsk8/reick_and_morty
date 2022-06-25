@@ -13,4 +13,6 @@ abstract class CharacterRepository {
   Future<Either<Failure, Character>> getCharacter({required String id});
   Future<Either<Failure, bool>> setFavoriteCharacter({required String id});
   Either<Failure, List<String>> getFavorites();
+  Future<Either<Failure, List<Episodie>>> getEpisodies(
+      {required List<String> episodies});
 }

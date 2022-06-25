@@ -66,4 +66,17 @@ class CharacterRepositoryImpl implements CharacterRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<Episodie>>> getEpisodies(
+      {required List<String> episodies}) async {
+    try {
+      final res =
+          await characterRemoteDataSource.getEpisodies(episodies: episodies);
+
+      return Right(res);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
 }

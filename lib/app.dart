@@ -4,6 +4,7 @@ import 'package:rick_and_morty/di/injection_container.dart';
 import 'package:rick_and_morty/features/welcome/presentation/pages/welcome_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/home/presentation/bloc/character/character_bloc.dart';
+import 'features/home/presentation/bloc/episodies/episodies_bloc.dart';
 import 'shared/app_router.dart';
 
 class App extends StatelessWidget {
@@ -12,8 +13,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return BlocProvider(
-      create: (BuildContext context) => sl<CharacterBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<CharacterBloc>()),
+        BlocProvider(create: (_) => sl<EpisodiesBloc>()),
+      ],
       child: MaterialApp(
         title: 'Rick And Morty',
         home: const WelcomePage(),

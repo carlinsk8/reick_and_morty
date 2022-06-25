@@ -12,7 +12,7 @@ class ButtonFavorite extends StatefulWidget {
 }
 
 class _ButtonFavoriteState extends State<ButtonFavorite> {
-  late bool status;
+  bool? status;
   @override
   void initState() {
     status = widget.status;
@@ -24,7 +24,7 @@ class _ButtonFavoriteState extends State<ButtonFavorite> {
     return IconButton(
       onPressed: () {
         setState(() {
-          status = !widget.status;
+          status = !status!;
         });
         if (widget.onPressed != null) {
           widget.onPressed!();
@@ -34,8 +34,7 @@ class _ButtonFavoriteState extends State<ButtonFavorite> {
         backgroundColor: const Color(0xffF0F0F0),
         child: Icon(
           Icons.star,
-          color:
-              widget.status ? const Color(0xffEEBA00) : const Color(0xffB9B9B9),
+          color: status! ? const Color(0xffEEBA00) : const Color(0xffB9B9B9),
         ),
       ),
     );

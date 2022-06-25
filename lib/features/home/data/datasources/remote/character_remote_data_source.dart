@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:rick_and_morty/core/api/public_http_client.dart';
 
 import '../../../../../core/error/exceptions.dart';
+import '../../../domain/entities/character.dart';
 import '../../models/character_model.dart';
 import '../local/character_local_data_source.dart';
 
@@ -13,6 +14,7 @@ abstract class CharacterRemoteDataSource {
       String? gender,
       required bool favorites});
   Future<CharacterModel> getCharacter({required String id});
+  Future<List<Episodie>> getEpisodies({required List<String> episodies});
 }
 
 class CharacterRemoteDataSourceImpl extends CharacterRemoteDataSource {
@@ -91,5 +93,25 @@ class CharacterRemoteDataSourceImpl extends CharacterRemoteDataSource {
       return data;
     }
     return {};
+  }
+
+  @override
+  Future<List<Episodie>> getEpisodies({required List<String> episodies}) async {
+    List<String> listId = [];
+    for (var e in episodies) {
+      var split = e.split('https://rickandmortyapi.com/api/episode/');
+      listId.add(split[1]);
+    }
+    var url =
+        '/api/episode/${json.encode(listId).replaceAll('[', '').replaceAll(']', '').replaceAll('"', '')}';
+    final response = await publicHttpClient.get(url);
+    final data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      final listCharacter =
+          List<EpisodieModel>.from(data.map((e) => EpisodieModel.fromJson(e)));
+      return listCharacter;
+    } else {
+      throw ServerException();
+    }
   }
 }
